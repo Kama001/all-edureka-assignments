@@ -1,0 +1,32 @@
+$ git show --name-only --oneline HEAD
+d020364 (HEAD -> master) first time changes
+frontend/frontendfile.txt
+
+$ git log HEAD --pretty="format:" --name-only
+frontend/frontendfile.txt
+
+backend/backendfile.txt
+frontend/frontendfile.txt
+
+$ git log d02036 --pretty="format:" --name-only
+frontend/frontendfile.txt
+
+backend/backendfile.txt
+frontend/frontendfile.txt
+
+$ git log 68871b --pretty="format:" --name-only
+backend/backendfile.txt
+frontend/frontendfile.txt
+
+$ git show HEAD --pretty="format:" --name-only
+shows files changed in a particular commit only
+
+$ git diff --name-only HEAD~1 | awk -F "/*[^/]*/*$" '{ print ($1 == "" ? "." : $1); }' | sort | uniq
+FirstFolder
+SecondFolder
+ThirdFolder
+
+$ git diff --dirstat=files,0 HEAD~1 | sed 's/^[ 0-9.]\+% //g'
+FirstFolder/
+SecondFolder/
+ThirdFolder/
