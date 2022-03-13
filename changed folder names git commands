@@ -38,3 +38,13 @@ SecondFolder/newfile1
 $ git diff --name-only HEAD~1 | awk -F  "/" '{print $2}' | sort | uniq
 InnerFolder
 newfile1
+
+// def x = ['one', 'two', 'three']
+// def y = ['one', 'three']
+// def valid = x.findAll { a ->
+//     y.any { a.contains(it) }
+// }
+// println(valid)
+
+String x = "one two three"
+println(x.contains("etwo"));
