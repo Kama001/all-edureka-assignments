@@ -30,3 +30,11 @@ $ git diff --dirstat=files,0 HEAD~1 | sed 's/^[ 0-9.]\+% //g'
 FirstFolder/
 SecondFolder/
 ThirdFolder/
+
+$ git diff --name-only HEAD~1
+FirstFolder/InnerFolder/newfile
+SecondFolder/newfile1
+
+$ git diff --name-only HEAD~1 | awk -F  "/" '{print $2}' | sort | uniq
+InnerFolder
+newfile1
