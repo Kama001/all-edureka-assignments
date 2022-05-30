@@ -24,3 +24,52 @@ int main() {
     // cout << "sdafdas";
     cout << dp(arr, sum, 0, 0);
 }
+
+// target sum problem
+#include<bits/stdc++.h>
+using namespace std;
+int dpArr[20][2001];
+bool dp(vector<int> arr, int target, int curI, int curSum) {
+    int curSumCp = curSum < 0 ? (-1*(curSum-target)) : curSum;
+    if(dpArr[curI][curSumCp] == -1) {
+        // cout << curI << " " << curSum << endl;
+        if(curI == arr.size()) {
+            return (curSum == target) ? 1 : 0;
+        }
+        else {
+            
+            return dpArr[curI][curSumCp] = dp(arr, target, curI+1, curSum+arr[curI]) + dp(arr, target, curI+1, curSum-arr[curI]);
+            // if(curSum < 0) {
+            //     curSum -= target;
+            //     curSum *= -1;
+            //     dpArr[curI][curSum] = sum;
+            // }
+            // else
+            //     dpArr[curI][curSum] = sum;
+            // return sum;
+        }
+    }
+    else {
+        return dpArr[curI][curSumCp];
+        // if(curSum < 0) {
+        //     return dpArr[curI][curSum+target+2] = sum;
+        // }
+        
+    }
+        // return dpArr[curI][curSum];
+}
+int main() {
+    memset(dpArr, -1, sizeof(dpArr));
+    // vector<int> arr{5,1,2,3,6,8,4,7,9};
+    vector<int> arr{1,1,1};
+    int sum = 1;
+    // cout << "sdafdas";
+    
+    cout << dp(arr, sum, 0, 0) << endl;
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < 8; j++) {
+            cout << dpArr[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
