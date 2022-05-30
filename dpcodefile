@@ -1,0 +1,26 @@
+// subset sum problem
+#include<bits/stdc++.h>
+using namespace std;
+int dpArr[200][2000];
+bool dp(vector<int> arr, int sum, int curI, int curSum) {
+    if(dpArr[curI][curSum] == -1) {
+        if(curSum == sum)
+            return 1;
+        if(curI == arr.size() || curSum > sum)
+            return 0;
+        else {
+            dpArr[curI][curSum] = dp(arr, sum, curI+1, curSum+arr[curI]) || dp(arr, sum, curI+1, curSum);
+            return dpArr[curI][curSum];
+        }
+    }
+    else
+        return dpArr[curI][curSum];
+}
+int main() {
+    memset(dpArr, -1, sizeof(dpArr));
+    // vector<int> arr{5,1,2,3,6,8,4,7,9};
+    vector<int> arr{3,4,5,2};
+    int sum = 2;
+    // cout << "sdafdas";
+    cout << dp(arr, sum, 0, 0);
+}
