@@ -95,3 +95,42 @@ int main() {
 //  20 21 22 23    02 12 22 32 
 //  30 31 32 33    03 13 23 33
 
+// equal sum partition
+#include<bits/stdc++.h>
+using namespace std;
+vector<vector<int>> dpArr(201, vector<int>(20001, -1));
+bool dp(vector<int> nums, int n, int curI, int sum, int curSum) {
+    // cout << curI << " " << curSum << " ";
+    if(dpArr[curI][curSum] == -1) {
+        // cout << "here1" << endl;
+        if(curSum == sum)
+            return true;
+        if(curSum > sum || curI == n)
+            return false;
+        else {
+            return dpArr[curI][sum] = dp(nums, n, curI+1, sum, curSum+nums[curI]) || dp(nums, n, curI+1, sum, curSum);
+        }
+    }
+    else {
+        // cout << "here2" << endl;
+        return dpArr[curI][curSum];    
+    }
+        
+}
+bool canPartition(vector<int> &nums) {
+    int cumSum = 0;
+    for(int a: nums) 
+        cumSum += a;
+    if(cumSum%2 == 0)
+        return dp(nums, nums.size(), 0, cumSum/2, 0);
+    return false;
+}
+int main() {
+    
+    // vector<int> arr{1, 5, 11, 5};
+    // vector<int> arr{2, 3, 3, 4, 3, 5};
+    // vector<int> arr{2,3,2,5,2};
+    
+    cout << canPartition(arr) << endl;
+    // cout << dpArr[3][5];
+}
